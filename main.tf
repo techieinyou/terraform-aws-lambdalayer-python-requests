@@ -1,9 +1,15 @@
 locals {
+  python_runtimes = ["python3.12", "python3.11", "python3.10", "python3.9", "python3.8"]
+}
+
+locals {
   temp_folder      = "lambdalayer"
   package_source   = "${local.temp_folder}\\requests\\python"
   package_file     = "${local.temp_folder}\\python-requests.zip"
   folder_2_install = "${local.temp_folder}\\requests\\python\\lib\\${var.python_runtime}\\site-packages"
   file_2_verify    = "${local.folder_2_install}\\requests\\__init__.py"
+
+  lambda_runtime = contains(local.python_runtimes, var.python_runtime) ? var.python_runtime : local.python_runtimes[0]
 }
 
 resource "null_resource" "create_folder" {
