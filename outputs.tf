@@ -1,4 +1,5 @@
 # returns lambda layer ARN
-output "lambda_layer_python_requests_arn" {
+output "arn" {
   value = aws_lambda_layer_version.python_requests.arn
+  description = "ARN of Lambda Layer created by this module"
 }
